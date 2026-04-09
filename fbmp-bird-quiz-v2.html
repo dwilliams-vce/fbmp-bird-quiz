@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forest Bird ID Quiz — Vermont Center for Ecostudies</title>
+</head>
+<body>
+
+<div id="fbmp-quiz" style="max-width:580px;margin:0 auto;padding:2rem 1rem;font-family:Georgia,'Times New Roman',serif;color:#1a1a1a;background:#f7f4ef;">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid #d8d2c8;">
+    <div style="width:44px;height:44px;border-radius:50%;background:#2d5a1b;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#c8e6a0;"><path d="M17 8C8 10 5.9 16.17 3.82 20.49L5.71 21l1-2.3A4.49 4.49 0 0 0 8 19c8-2 9-9 9-9 0 0-2 4-8 5 7-5 9-13 9-13"/></svg>
+    </div>
+    <div>
+      <div style="font-size:13px;color:#5a5a4a;font-family:'Helvetica Neue',Arial,sans-serif;">Vermont Center for Ecostudies</div>
+      <div style="font-size:15px;font-weight:bold;color:#2d5a1b;font-family:'Helvetica Neue',Arial,sans-serif;">Forest Bird Monitoring Program</div>
+    </div>
+  </div>
+
+  <!-- INTRO SECTION -->
+  <div id="sec-intro" style="display:block;">
+    <div style="background:#ffffff;border:1px solid #ddd8cf;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <h1 style="font-size:22px;color:#1a1a1a;margin-bottom:0.75rem;line-height:1.3;">Volunteer ID Quiz</h1>
+      <p style="font-size:15px;color:#4a4a3a;line-height:1.75;margin-bottom:1rem;">
+        You'll hear 10 Vermont forest bird songs. For each one, type the bird's common name
+        (e.g. <em>Hermit Thrush</em>) or its 4-letter banding code (e.g. <em>HETH</em>).
+        A score of <strong>8 out of 10 (80%)</strong> or higher qualifies you to volunteer with the FBMP.
+      </p>
+      <p style="font-size:15px;color:#4a4a3a;line-height:1.75;margin-bottom:1.75rem;">
+        Use headphones if you can — forest acoustics matter! You may replay each recording as many times as you like.
+      </p>
+      <button id="btn-start" style="width:100%;padding:13px;background:#2d5a1b;color:#ffffff;border:1px solid #2d5a1b;border-radius:6px;font-size:15px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;cursor:pointer;letter-spacing:0.02em;">Start quiz</button>
+    </div>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div id="sec-quiz" style="display:none;">
+    <!-- Progress bar -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#7a7a6a;font-family:'Helvetica Neue',Arial,sans-serif;margin-bottom:6px;">
+        <span id="progress-label">Bird 1 of 10</span>
+        <span id="progress-pct">10%</span>
+      </div>
+      <div style="background:#e0dbd0;border-radius:99px;height:5px;">
+        <div id="progress-fill" style="height:5px;border-radius:99px;background:#2d5a1b;transition:width 0.4s ease;width:10%;"></div>
+      </div>
+    </div>
+    <div style="background:#ffffff;border:1px solid #ddd8cf;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <div id="bird-badge" style="display:inline-block;background:#eaf3de;color:#2d5a1b;font-size:11px;font-weight:bold;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:1rem;">Bird 1 of 10</div>
+      <div style="font-size:18px;font-weight:bold;color:#1a1a1a;margin-bottom:1.25rem;">Listen and identify this bird</div>
+      <div style="background:#f2ede4;border:1px solid #ddd8cf;border-radius:6px;padding:1.25rem;margin-bottom:1.5rem;text-align:center;">
+        <audio id="bird-audio" controls preload="none" style="width:100%;height:42px;"></audio>
+        <div style="font-size:12px;color:#7a7a6a;margin-top:8px;font-family:'Helvetica Neue',Arial,sans-serif;">You may replay as many times as you like</div>
+      </div>
+      <label for="answer-input" style="font-size:12px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;color:#5a5a4a;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;display:block;">Your answer</label>
+      <input type="text" id="answer-input" placeholder="Common name or 4-letter code…" autocomplete="off"
+        style="width:100%;padding:11px 14px;border:1px solid #ccc8be;border-radius:6px;font-size:16px;font-family:Georgia,serif;background:#fdfcf9;color:#1a1a1a;outline:none;box-sizing:border-box;" />
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:10px;">
+        <button id="btn-back" style="padding:10px 22px;border-radius:6px;font-size:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;cursor:pointer;border:none;background:transparent;color:#7a7a6a;letter-spacing:0.02em;">← Back</button>
+        <button id="btn-next" style="padding:10px 22px;background:#2d5a1b;color:#ffffff;border:1px solid #2d5a1b;border-radius:6px;font-size:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;cursor:pointer;letter-spacing:0.02em;">Next bird →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <div id="sec-contact" style="display:none;">
+    <div style="margin-bottom:1.5rem;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#7a7a6a;font-family:'Helvetica Neue',Arial,sans-serif;margin-bottom:6px;">
+        <span>Almost done!</span><span>10 / 10</span>
+      </div>
+      <div style="background:#e0dbd0;border-radius:99px;height:5px;">
+        <div style="height:5px;border-radius:99px;background:#2d5a1b;width:100%;"></div>
+      </div>
+    </div>
+    <div style="background:#ffffff;border:1px solid #ddd8cf;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <h2 style="font-size:19px;color:#1a1a1a;margin-bottom:6px;">Your contact info</h2>
+      <p style="font-size:15px;color:#4a4a3a;line-height:1.75;margin-bottom:1.25rem;">Please share a bit about yourself so we can follow up about volunteering.</p>
+      <div style="margin-bottom:1.1rem;">
+        <label for="f-name" style="font-size:12px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;color:#5a5a4a;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:5px;">Full name</label>
+        <input type="text" id="f-name" placeholder="Jane Smith"
+          style="width:100%;padding:11px 14px;border:1px solid #ccc8be;border-radius:6px;font-size:15px;font-family:Georgia,serif;background:#fdfcf9;color:#1a1a1a;outline:none;box-sizing:border-box;" />
+      </div>
+      <div style="margin-bottom:1.1rem;">
+        <label for="f-email" style="font-size:12px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;color:#5a5a4a;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:5px;">Email address</label>
+        <input type="email" id="f-email" placeholder="jane@example.com"
+          style="width:100%;padding:11px 14px;border:1px solid #ccc8be;border-radius:6px;font-size:15px;font-family:Georgia,serif;background:#fdfcf9;color:#1a1a1a;outline:none;box-sizing:border-box;" />
+      </div>
+      <div style="margin-bottom:1.1rem;">
+        <label for="f-why" style="font-size:12px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;color:#5a5a4a;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:5px;">Why do you want to volunteer with the FBMP?</label>
+        <textarea id="f-why" placeholder="Tell us about your birding experience and interest in the project…"
+          style="width:100%;padding:11px 14px;border:1px solid #ccc8be;border-radius:6px;font-size:15px;font-family:Georgia,serif;background:#fdfcf9;color:#1a1a1a;outline:none;resize:vertical;min-height:90px;box-sizing:border-box;"></textarea>
+      </div>
+      <div id="submit-error" style="display:none;font-size:13px;color:#b03020;margin-top:6px;font-family:'Helvetica Neue',Arial,sans-serif;">Please enter your name and a valid email address.</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;gap:10px;">
+        <button id="btn-back-contact" style="padding:10px 22px;border-radius:6px;font-size:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;cursor:pointer;border:none;background:transparent;color:#7a7a6a;letter-spacing:0.02em;">← Back to quiz</button>
+        <button id="btn-submit" style="padding:10px 22px;background:#2d5a1b;color:#ffffff;border:1px solid #2d5a1b;border-radius:6px;font-size:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;cursor:pointer;letter-spacing:0.02em;">Submit my answers</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SECTION -->
+  <div id="sec-results" style="display:none;">
+    <div style="background:#ffffff;border:1px solid #ddd8cf;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <div id="score-circle" style="width:100px;height:100px;border-radius:50%;border:3px solid #2d5a1b;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+        <div id="score-num" style="font-size:30px;font-weight:bold;color:#2d5a1b;line-height:1;">—</div>
+        <div style="font-size:12px;color:#7a7a6a;font-family:'Helvetica Neue',Arial,sans-serif;margin-top:2px;">out of 10</div>
+      </div>
+      <div id="result-title" style="font-size:20px;text-align:center;margin-bottom:6px;font-family:Georgia,serif;"></div>
+      <div id="result-sub" style="font-size:14px;color:#5a5a4a;text-align:center;line-height:1.7;margin-bottom:1rem;font-family:'Helvetica Neue',Arial,sans-serif;"></div>
+      <hr style="border:none;border-top:1px solid #e8e3da;margin:1.25rem 0;" />
+      <div style="font-size:11px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:bold;letter-spacing:0.08em;text-transform:uppercase;color:#7a7a6a;margin-bottom:8px;">Answer breakdown</div>
+      <div id="breakdown-list"></div>
+      <div id="status-msg" style="font-size:13px;color:#5a5a4a;text-align:center;margin-top:1.25rem;line-height:1.6;font-family:'Helvetica Neue',Arial,sans-serif;"></div>
+    </div>
+  </div>
+
+</div><!-- end fbmp-quiz -->
+
+<script>
+(function() {
+
+  // ============================================================
+  // AUDIO URLs — update these if you move files to WordPress
+  // ============================================================
+  var AUDIO_URLS = {
+    "HETH1.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104846/HETH1.wav",
+    "OVEN2.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104848/OVEN2.wav",
+    "SCTA3.mp3":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104848/SCTA3.mp3",
+    "BHVI4.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104842/BHVI4.wav",
+    "BLBW5.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104843/BLBW5.wav",
+    "WOTH6.mp3":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104850/WOTH6.mp3",
+    "AMRE7.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104840/AMRE7.wav",
+    "BRCR8.wav":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104844/BRCR8.wav",
+    "BTNW9.mp3":  "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104845/BTNW9.mp3",
+    "MYWA10.wav": "https://media.vtecostudies.org/wp-content/uploads/2026/01/16104847/MYWA10.wav"
+  };
+
+  // ============================================================
+  // Google Sheet webhook URL
+  // ============================================================
+  var SHEET_URL = "https://script.google.com/a/macros/vtecostudies.org/s/AKfycbzG1Vwv33Se95IgVyeGzODK4RRN4UPfEfoVnQwubfTGTmrq0PE_euU3fmC_cf1kJvI/exec";
+
+  // ============================================================
+  // Answer key
+  // ============================================================
+  var BIRDS = [
+    { file:"HETH1.wav",  correct:["hermit thrush","heth"] },
+    { file:"OVEN2.wav",  correct:["ovenbird","oven"] },
+    { file:"SCTA3.mp3",  correct:["scarlet tanager","scta"] },
+    { file:"BHVI4.wav",  correct:["blue-headed vireo","bhvi"] },
+    { file:"BLBW5.wav",  correct:["blackburnian warbler","blbw"] },
+    { file:"WOTH6.mp3",  correct:["wood thrush","woth"] },
+    { file:"AMRE7.wav",  correct:["american redstart","amre"] },
+    { file:"BRCR8.wav",  correct:["brown creeper","brcr"] },
+    { file:"BTNW9.mp3",  correct:["black-throated green warbler","btnw"] },
+    { file:"MYWA10.wav", correct:["myrtle warbler","yellow-rumped warbler","mywa"] }
+  ];
+
+  // ============================================================
+  // Quiz logic
+  // ============================================================
+  var current = 0;
+  var userAnswers = [];
+
+  function show(id) {
+    var sections = ["sec-intro","sec-quiz","sec-contact","sec-results"];
+    for (var i = 0; i < sections.length; i++) {
+      document.getElementById(sections[i]).style.display = "none";
+    }
+    document.getElementById(id).style.display = "block";
+  }
+
+  function saveCurrentAnswer() {
+    userAnswers[current] = document.getElementById("answer-input").value.trim();
+  }
+
+  function loadBird() {
+    var b = BIRDS[current];
+    var n = current + 1;
+    document.getElementById("bird-badge").textContent = "Bird " + n + " of 10";
+    document.getElementById("progress-label").textContent = "Bird " + n + " of 10";
+    document.getElementById("progress-pct").textContent = (n * 10) + "%";
+    document.getElementById("progress-fill").style.width = (n / 10 * 90) + "%";
+    var inp = document.getElementById("answer-input");
+    inp.value = userAnswers[current] || "";
+    inp.focus();
+    var audio = document.getElementById("bird-audio");
+    audio.src = AUDIO_URLS[b.file];
+    audio.load();
+    document.getElementById("btn-next").textContent = current === 9 ? "Review answers →" : "Next bird →";
+    document.getElementById("btn-back").style.opacity = current === 0 ? "0.3" : "1";
+    document.getElementById("btn-back").disabled = current === 0;
+  }
+
+  function normalize(s) {
+    return s.toLowerCase().replace(/[^a-z0-9 \-]/g, "").trim();
+  }
+
+  function checkAnswer(bird, answer) {
+    var norm = normalize(answer);
+    for (var i = 0; i < bird.correct.length; i++) {
+      if (normalize(bird.correct[i]) === norm) return true;
+    }
+    return false;
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function submitQuiz() {
+    var name  = document.getElementById("f-name").value.trim();
+    var email = document.getElementById("f-email").value.trim();
+    var why   = document.getElementById("f-why").value.trim();
+    var err   = document.getElementById("submit-error");
+    if (!name || !email || email.indexOf("@") === -1) {
+      err.style.display = "block"; return;
+    }
+    err.style.display = "none";
+
+    var btn = document.getElementById("btn-submit");
+    btn.disabled = true;
+    btn.textContent = "Submitting…";
+
+    var score = 0;
+    var details = BIRDS.map(function(b, i) {
+      var correct = checkAnswer(b, userAnswers[i] || "");
+      if (correct) score++;
+      return {
+        bird: b.file.replace(/[0-9]*\.(wav|mp3)/, ""),
+        userAnswer: userAnswers[i] || "(blank)",
+        correct: correct
+      };
+    });
+
+    var passed = score >= 8;
+    var pct = score * 10;
+
+    document.getElementById("score-num").textContent = score;
+    document.getElementById("score-circle").style.borderColor = passed ? "#2d5a1b" : "#b03020";
+    document.getElementById("score-num").style.color = passed ? "#2d5a1b" : "#b03020";
+    document.getElementById("result-title").textContent = passed
+      ? "Congratulations — you passed!"
+      : "Not quite — keep practicing!";
+    document.getElementById("result-sub").textContent = passed
+      ? "You scored " + score + "/10 (" + pct + "%). Kevin from the FBMP team will be in touch soon."
+      : "You scored " + score + "/10 (" + pct + "%). You need 8/10 to qualify. Review the breakdown below and try again when you're ready!";
+
+    var list = document.getElementById("breakdown-list");
+    list.innerHTML = "";
+    details.forEach(function(d, i) {
+      var row = document.createElement("div");
+      row.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0ece4;font-size:13px;font-family:'Helvetica Neue',Arial,sans-serif;";
+      var tagColor = d.correct ? "background:#eaf3de;color:#2d5a1b;" : "background:#fdecea;color:#b03020;";
+      row.innerHTML =
+        '<span style="color:#5a5a4a;">Bird ' + (i+1) +
+        ' <strong style="color:#1a1a1a;">(' + d.bird + ')</strong></span>' +
+        '<span style="display:flex;align-items:center;gap:8px;">' +
+        '<span style="color:#5a5a4a;">' + escHtml(d.userAnswer) + '</span>' +
+        '<span style="font-size:11px;font-weight:bold;padding:3px 9px;border-radius:99px;font-family:Helvetica Neue,Arial,sans-serif;' + tagColor + '">' +
+        (d.correct ? "correct" : "wrong") + '</span></span>';
+      list.appendChild(row);
+    });
+
+    show("sec-results");
+
+    var payload = {
+      name: name, email: email, why: why,
+      score: score + "/10",
+      passed: passed ? "yes" : "no",
+      timestamp: new Date().toISOString(),
+      answers: details.map(function(d, i) {
+        return "Bird " + (i+1) + " (" + d.bird + "): " + d.userAnswer + (d.correct ? " ✓" : " ✗");
+      }).join(" | ")
+    };
+
+    fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:JSON.stringify(payload) })
+      .then(function() {
+        document.getElementById("status-msg").textContent =
+          "Your results have been sent to the FBMP team. We'll be in touch!";
+      })
+      .catch(function() {
+        document.getElementById("status-msg").innerHTML =
+          "There was a problem sending your results automatically. " +
+          "Please email <a href='mailto:ktolan@vtecostudies.org' style='color:#2d5a1b;'>ktolan@vtecostudies.org</a> directly.";
+      });
+  }
+
+  // Wire up buttons after page loads
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("btn-start").addEventListener("click", function() {
+      current = 0; userAnswers = [];
+      show("sec-quiz");
+      loadBird();
+    });
+
+    document.getElementById("btn-next").addEventListener("click", function() {
+      saveCurrentAnswer();
+      if (current < 9) { current++; loadBird(); }
+      else { show("sec-contact"); }
+    });
+
+    document.getElementById("btn-back").addEventListener("click", function() {
+      saveCurrentAnswer();
+      if (current > 0) { current--; loadBird(); }
+    });
+
+    document.getElementById("btn-back-contact").addEventListener("click", function() {
+      show("sec-quiz");
+      loadBird();
+    });
+
+    document.getElementById("btn-submit").addEventListener("click", function() {
+      submitQuiz();
+    });
+
+    document.getElementById("answer-input").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        saveCurrentAnswer();
+        if (current < 9) { current++; loadBird(); }
+        else { show("sec-contact"); }
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
